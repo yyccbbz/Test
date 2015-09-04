@@ -1,13 +1,6 @@
 package org.yyccbbz.mybatis.pojo;
 
-
-
-/**
- * 订单表
- * 
- */
 public class Order {
-
     private Integer id;
 
     private Long userId;
@@ -35,7 +28,6 @@ public class Order {
     }
 
     public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+        this.orderNumber = orderNumber == null ? null : orderNumber.trim();
     }
-
 }

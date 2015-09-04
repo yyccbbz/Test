@@ -3,31 +3,22 @@ package org.yyccbbz.mybatis.pojo;
 import java.util.Date;
 
 public class User {
-
     private Long id;
 
-    // 用户名
     private String userName;
 
-    // 密码
     private String password;
 
-    // 姓名
     private String name;
 
-    // 年龄
     private Integer age;
 
-    // 性别，1男性，2女性
-    private Integer sex;
+    private Boolean sex;
 
-    // 出生日期
     private Date birthday;
 
-    // 创建时间
     private Date created;
 
-    // 更新时间
     private Date updated;
 
     public Long getId() {
@@ -38,12 +29,12 @@ public class User {
         this.id = id;
     }
 
-    public String getuserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setuserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -51,7 +42,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getName() {
@@ -59,7 +50,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getAge() {
@@ -70,11 +61,11 @@ public class User {
         this.age = age;
     }
 
-    public Integer getSex() {
+    public Boolean getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 
@@ -101,12 +92,4 @@ public class User {
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", name=" + name
-                + ", age=" + age + ", sex=" + sex + ", birthday=" + birthday + ", created=" + created
-                + ", updated=" + updated + "]";
-    }
-
 }

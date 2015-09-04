@@ -1,53 +1,30 @@
 package org.yyccbbz.mybatis.mapper;
 
 import java.util.List;
-
+import org.apache.ibatis.annotations.Param;
 import org.yyccbbz.mybatis.pojo.User;
+import org.yyccbbz.mybatis.pojo.UserExample;
 
 public interface UserMapper {
+    int countByExample(UserExample example);
 
-    /**
-     * 根据id查询用户信息
-     * 
-     * @param id
-     * @return
-     */
-    public User queryUserById(Long id);
+    int deleteByExample(UserExample example);
 
-    /**
-     * 查询所有用户数据
-     * 
-     * @return
-     */
-    public List<User> queryAll();
+    int deleteByPrimaryKey(Long id);
 
-    /**
-     * 新增用户信息
-     * 
-     * @param user
-     */
-    public void saveUser(User user);
+    int insert(User record);
 
-    /**
-     * 更新用户信息
-     * 
-     * @param user
-     */
-    public void updateUser(User user);
+    int insertSelective(User record);
 
-    /**
-     * 根据id删除用户信息
-     * 
-     * @param id
-     */
-    public void deleteUserById(Long id);
-    
-    /**
-     * 根据姓名名字模糊查询用户集合
-     * 
-     * @param name
-     * @return
-     */
-    public List<User> queryUserListByName(String name);
+    List<User> selectByExample(UserExample example);
 
+    User selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

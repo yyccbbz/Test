@@ -1,10 +1,6 @@
 package org.yyccbbz.mybatis.pojo;
 
-/**
- * 商品表
- */
 public class Item {
-
     private Integer id;
 
     private String itemName;
@@ -26,7 +22,7 @@ public class Item {
     }
 
     public void setItemName(String itemName) {
-        this.itemName = itemName;
+        this.itemName = itemName == null ? null : itemName.trim();
     }
 
     public Float getItemPrice() {
@@ -42,7 +38,6 @@ public class Item {
     }
 
     public void setItemDetail(String itemDetail) {
-        this.itemDetail = itemDetail;
+        this.itemDetail = itemDetail == null ? null : itemDetail.trim();
     }
-
 }

@@ -6,6 +6,7 @@ import org.yyccbbz.mybatis.pojo.User;
 import org.yyccbbz.mybatis.pojo.UserExample;
 
 public interface UserMapper {
+    
     int countByExample(UserExample example);
 
     int deleteByExample(UserExample example);

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 	
-	<select id="findUserById" resultType="org.yyccbbz.mybatis.pojo.User">
+	<select id="findUserById" parameterType="Long" resultType="org.yyccbbz.mybatis.pojo.User">
 		SELECT *,user_name userName FROM tb_user WHERE id = #{id}
 	</select>
 	

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:cache="http://www.springframework.org/schema/cache"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/cache 
+		http://www.springframework.org/schema/cache/spring-cache.xsd">
+		
+	<!-- 第一步：使用组件的自动扫描，在org.yyccbbz.elec包下，
+		可以在类上使用注解@Controller，@Service，@Repository，@Componment（泛指组件） -->
+<!-- 	<context:component-scan base-package="org.yyccbbz.elec"/> -->
+	
+	<!-- 引入外部属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!-- 第二步：dbcp连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+	</bean>
+	
+	<!-- 配置SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 配置mybatis的全局配置文件的路径 -->
+		<property name="configLocation" value="mybatis-config.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+
+	<!-- 配置userDao -->
+	<bean id="userDao" class="org.yyccbbz.mybatis.dao.impl.UserDaoImpl">
+		<!-- 注入SqlSessionFactory -->
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置mapper的代理生成 -->
+<!-- 	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
+<!-- 		<property name="mapperInterface" value="cn.itcast.sm.mapper.UserMapper"></property> -->
+<!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
+<!-- 	</bean> -->
+
+	<!-- 批量生成mapper代理对象 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 配置需要代理生成的mapper接口所在的包的包名 -->
+		<property name="basePackage" value="org.yyccbbz.mybatis.mapper"></property>
+	</bean>
+	
+	
+	<!-- 添加spring的cxf -->
+<!-- 	<import resource="beans-cxf.xml"/> -->
+<!-- 	<import resource="beans-activiti.xml"/> -->
+<!-- 	<import resource="beans-shiro.xml"/> -->
+<!-- 	<import resource="beans-cache.xml"/> -->
+	
+</beans>
+

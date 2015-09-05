@@ -4,15 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class UserMapperTest {
-    
-    private UserMapper userMapper;
+
+    private ApplicationContext ac;
 
     @Before
     public void setUp() throws Exception {
-        String resource = "mybatis-config.xml";
-        
+        ac = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 
     @Test

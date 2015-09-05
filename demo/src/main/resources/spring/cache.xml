@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+
+
+        http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<!-- 缓存拦截器 -->
+	<bean id="dataCacheProcesser" class="com.jwww.support.cache.DataCacheProcesser">
+		<property name="processGroupNames">
+			<list>
+				<value>Permission</value>
+				<value>Role</value>
+				<value>Staff</value>
+				<value>Organization</value>
+			</list>
+		</property>
+	</bean>
+	<aop:config>
+		<aop:pointcut id="dataCachePointCut"
+			expression="execution(@com.jwww.support.cache.config.CacheAction * * (..))" />
+		<aop:advisor advice-ref="dataCacheProcesser" pointcut-ref="dataCachePointCut" />
+	</aop:config>
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.pool.maxTotal}" />
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<property name="minIdle" value="${redis.pool.minIdle}" />
+	</bean>
+
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<property name="hostName" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<property name="timeout" value="${redis.timeout}" />
+	</bean>
+
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+		</property>
+	</bean>
+
+	<bean id="memCacheProvider" class="com.jwww.support.cache.redis.RedisCacheProvider">
+		<property name="redisTemplate" ref="redisTemplate" />
+	</bean> 
+
+</beans>

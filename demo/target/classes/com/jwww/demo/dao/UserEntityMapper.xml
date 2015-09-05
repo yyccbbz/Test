@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jwww.demo.dao.UserEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.jwww.demo.domin.UserEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="score_level" property="scoreLevel" jdbcType="INTEGER" />
+    <result column="reg_ip" property="regIp" jdbcType="VARCHAR" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="follows" property="follows" jdbcType="INTEGER" />
+    <result column="fans" property="fans" jdbcType="INTEGER" />
+    <result column="is_certified" property="isCertified" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, password, email, mobile, avatar, score, score_level, reg_ip, reg_time, 
+    last_login_ip, last_login_time, status, follows, fans, is_certified
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from zc_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from zc_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jwww.demo.domin.UserEntity" >
+    insert into zc_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="scoreLevel != null" >
+        score_level,
+      </if>
+      <if test="regIp != null" >
+        reg_ip,
+      </if>
+      <if test="regTime != null" >
+        reg_time,
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="follows != null" >
+        follows,
+      </if>
+      <if test="fans != null" >
+        fans,
+      </if>
+      <if test="isCertified != null" >
+        is_certified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="scoreLevel != null" >
+        #{scoreLevel,jdbcType=INTEGER},
+      </if>
+      <if test="regIp != null" >
+        #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="regTime != null" >
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null" >
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="follows != null" >
+        #{follows,jdbcType=INTEGER},
+      </if>
+      <if test="fans != null" >
+        #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="isCertified != null" >
+        #{isCertified,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="map" >
+    update zc_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null and score gt 0" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="scoreLevel != null and scoreLevel gt 0" >
+        score_level = #{scoreLevel,jdbcType=INTEGER},
+      </if>
+      <if test="regIp != null" >
+        reg_ip = #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="regTime != null" >
+        reg_time = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null and status gt 0" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="follows != null and follows gt 0" >
+        follows = #{follows,jdbcType=INTEGER},
+      </if>
+      <if test="fans != null and fans gt 0" >
+        fans = #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="isCertified != null" >
+        is_certified = #{isCertified,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getListByIds" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from zc_user
+    where id IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+         #{item}  
+         </foreach>
+  </select>
+  
+  
+   <delete id="deleteByIds">
+    delete from zc_user
+    where id IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+         #{item}  
+         </foreach>
+  </delete>
+  
+  <update id="updateByQuery" parameterType="NativeQuery">
+     update zc_user set ${updateSet}
+     where ${where}
+  </update>
+  
+   <delete id="deleteByQuery" parameterType="NativeQuery">
+     delete from zc_user where ${where}
+  </delete>
+  
+   
+  <select id="statisticsQuery" resultType="BigDecimal" parameterType="NativeQuery" >
+    select ${fields}
+    from zc_user
+    where ${where}
+  </select>
+  
+  <select id="findOneByQuery" parameterType="NativeQuery" resultMap="BaseResultMap">
+       select ${fields}
+        from zc_user
+        <if test="join != null" >${join}</if>
+        where ${where}
+        <if test="orderBy != null" >
+         order by ${orderBy}
+        </if>	
+		limit 1
+   </select>
+   
+    <select id="findListByQuery" parameterType="NativeQuery" resultMap="BaseResultMap">
+       select ${fields}
+       from zc_user
+       <if test="join != null" >${join}</if>
+       where ${where}
+       <if test="orderBy!=null"> order by ${orderBy}</if>			
+   </select>
+   
+   
+    <select id="findLists" parameterType="EntityQuery" resultMap="BaseResultMap">
+		SELECT ${selectFields}
+		FROM zc_user
+	    <if test="where != null" >
+         WHERE ${where}
+        </if>	
+		<choose>
+          <when test="sortAs!=null">
+             order by ${sortAs}
+          </when>
+          <otherwise>
+             order by id desc
+          </otherwise>
+        </choose>		
+   </select>
+  
+  
+  <select id="getCount" parameterType="EntityQuery" resultType="int">
+		SELECT COUNT(*) 
+		FROM zc_user
+		WHERE <include refid="query_where" />
+   </select>
+   
+   
+   <select id="findListByPage" parameterType="EntityQuery" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		FROM zc_user
+		WHERE <include refid="query_where" />
+		<choose>
+          <when test="sortAs!=null">
+             order by ${sortAs}
+          </when>
+          <otherwise>
+             order by id desc
+          </otherwise>
+        </choose>
+        limit #{startIndex}, #{pageLimit}
+	</select>
+	
+	 <sql id="query_where">
+	     1=1
+	 </sql>
+</mapper>

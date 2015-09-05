@@ -10,28 +10,26 @@ import org.yyccbbz.ssm.pojo.Item;
 import org.yyccbbz.ssm.pojo.ItemQueryVO;
 import org.yyccbbz.ssm.service.ItemService;
 
-
 @Controller
 public class ItemController {
-    
+
     // 注入service
     @Autowired
     private ItemService itemService;
-    
-    
+
     /**
      * 根据条件查询商品信息
      * 
      * @return
      */
     @RequestMapping("/queryItems")
-    public String queryItems(Model model){
-        
+    public String queryItems(Model model) {
+
         ItemQueryVO vo = null;
-        List<Item> list = itemService.findItemsByQueryVO(vo );
-        model.addAttribute("list", list);
-        
+        List<Item> itemslist = itemService.findItemsByQueryVO(vo);
+        model.addAttribute("itemslist", itemslist);
+
         return "items/itemsList.jsp";
     }
-    
+
 }

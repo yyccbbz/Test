@@ -15,18 +15,28 @@
 			http://www.springframework.org/schema/tx 
 			http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 		
-	<!-- 使用注解的handler可以使用组件扫描器，加载handler -->
-	<context:component-scan base-package="org.yyccbbz.ssm.controller" />
-	
-	<!-- 配置处理器映射器和处理器适配器 -->
+	<!-- 使用mvc标签配置注解方式的处理器映射器还有处理器适配器 -->
+	<!-- 使用该标签，就可以替代上面的两个注解方式的处理器映射器和适配器的配置 -->
+	<!-- 它默认支持json参数绑定组件 -->
 	<mvc:annotation-driven />
 	
-	<!-- 配置视图解析器 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
+	<!-- 视图解析器 (jstlView)-->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
 	</bean>
+
+	<!-- 使用扫描器来加载注解方式的处理器 -->
+	<context:component-scan base-package="org.yyccbbz.ssm.controller"></context:component-scan>
+	
+	<!-- 配置自定义参数绑定组件 -->
+	<!-- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="org.yyccbbz.ssm.controller.converter.DataConverter"></bean>
+			</list>
+		</property>
+	</bean> -->
 	
 
 </beans>

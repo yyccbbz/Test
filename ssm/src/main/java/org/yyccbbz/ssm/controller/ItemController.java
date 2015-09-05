@@ -25,11 +25,10 @@ public class ItemController {
     @RequestMapping("/queryItems")
     public String queryItems(Model model) {
 
-        ItemQueryVO vo = null;
-        List<Item> itemslist = itemService.findItemsByQueryVO(vo);
+        List<Item> itemslist = itemService.findItemsByQueryVO(null);
         model.addAttribute("itemslist", itemslist);
 
-        return "items/itemsList.jsp";
+        return "items/itemsList";
     }
 
 }

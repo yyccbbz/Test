@@ -17,55 +17,41 @@
 		http://www.springframework.org/schema/cache 
 		http://www.springframework.org/schema/cache/spring-cache.xsd">
 		
-	<!-- 第一步：使用组件的自动扫描，在org.yyccbbz.elec包下，
+	<!-- 使用组件的自动扫描，在org.yyccbbz.elec包下，
 		可以在类上使用注解@Controller，@Service，@Repository，@Componment（泛指组件） -->
-<!-- 	<context:component-scan base-package="org.yyccbbz.elec"/> -->
+	<context:component-scan base-package="org.yyccbbz.ssm.service"/>
 	
-	<!-- 引入外部属性文件 -->
-	<context:property-placeholder location="classpath:jdbc.properties" />
-
-	<!-- 第二步：dbcp连接池 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<property name="maxActive" value="10" />
-		<property name="maxIdle" value="5" />
-	</bean>
-	
-	<!-- 配置SqlSessionFactory -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 配置mybatis的全局配置文件的路径 -->
-		<property name="configLocation" value="mybatis-config.xml"></property>
+	<!-- 配置事务 -->
+	<!-- 事务管理器，对mybatis操作数据库进行事务控制，此处使用jdbc的事务控制 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 指定要进行事务管理的数据源 -->
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
 
-	<!-- 配置userDao -->
-	<bean id="userDao" class="org.yyccbbz.mybatis.dao.impl.UserDaoImpl">
-		<!-- 注入SqlSessionFactory -->
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean>
+	<!-- 通知 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 传播行为 -->
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+			<tx:method name="get*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
 
-	<!-- 配置mapper的代理生成 -->
-<!-- 	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
-<!-- 		<property name="mapperInterface" value="cn.itcast.sm.mapper.UserMapper"></property> -->
-<!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
-<!-- 	</bean> -->
-
-	<!-- 批量生成mapper代理对象 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<!-- 配置需要代理生成的mapper接口所在的包的包名 -->
-		<property name="basePackage" value="org.yyccbbz.mybatis.mapper"></property>
-	</bean>
+	<!-- aop -->
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* org.yyccbbz.ssm.service.impl.*.*(..))" />
+	</aop:config>
 	
-	
-	<!-- 添加spring的cxf -->
-<!-- 	<import resource="beans-cxf.xml"/> -->
-<!-- 	<import resource="beans-activiti.xml"/> -->
-<!-- 	<import resource="beans-shiro.xml"/> -->
-<!-- 	<import resource="beans-cache.xml"/> -->
 	
 </beans>
 

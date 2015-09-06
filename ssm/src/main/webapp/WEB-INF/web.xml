@@ -13,7 +13,7 @@
 	<!-- 加载配置文件默认 WEB-INF/applicationContext.xml -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext-*.xml</param-value>
+		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
 	
 	<!-- 配置post方式的字符过滤器解决中文乱码问题 -->

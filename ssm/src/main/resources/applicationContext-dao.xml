@@ -36,15 +36,15 @@
 	<!-- 配置SqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 配置mybatis的全局配置文件的路径 -->
-		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<!-- 配置数据源 -->
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
 	<!-- mapper扫描器,批量生成mapper代理对象 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 配置需要代理生成的mapper接口所在的包的包名 -->
-		<property name="basePackage" value="org.yyccbbz.ssm.mapper"></property>
+		<property name="basePackage" value="org.yyccbbz.ssm.mapper"/>
 	</bean>
 	
 </beans>

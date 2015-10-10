@@ -141,11 +141,11 @@
 		</dependency>
 
 		<!-- 校验器 -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.0.Final</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<artifactId>hibernate-validator</artifactId> -->
+<!-- 			<version>5.2.0.Final</version> -->
+<!-- 		</dependency> -->
 
 		<!-- 字符串转日期类型 -->
 		<dependency>
@@ -154,11 +154,11 @@
 		</dependency>
 
 		<!-- excel 输出 -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>3.12</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.poi</groupId> -->
+<!-- 			<artifactId>poi</artifactId> -->
+<!-- 			<version>3.12</version> -->
+<!-- 		</dependency> -->
 
 
 

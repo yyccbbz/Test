@@ -17,7 +17,7 @@ public class MyJDBC {
             Class.forName("com.mysql.jdbc.Driver");
 
             // 获取连接
-            connection = DriverManager.getConnection("jdbc:mysql://192.168.2.221:3306/mybatis_0902", "root",
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/mybatis_0902", "root",
                     "root");
 
             // 获取statement

@@ -32,7 +32,7 @@
 	</bean>
 
 	<!-- 使用扫描器来加载注解方式的处理器 -->
-	<context:component-scan base-package="org.yyccbbz.ssm.controller"></context:component-scan>
+	<context:component-scan base-package="org.yyccbbz.ssm.controller"/>
 	
 	<!-- 配置自定义参数绑定组件 -->
 	<!-- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
